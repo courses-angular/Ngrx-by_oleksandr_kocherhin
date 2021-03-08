@@ -1,26 +1,25 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { select, Store } from '@ngrx/store';
-import { registerAction } from '../../store/actions/register.action';
 import { Observable } from 'rxjs';
+import { BackendErrorsInterface } from '../../../shared/types/backend-errors.interface';
+import { select, Store } from '@ngrx/store';
+import { AuthService } from '../../services/auth.service';
 import {
   isSubmittingSelector,
   validationErrorsSelector,
 } from '../../store/selectors/auth-feature.selector';
-import { AuthService } from '../../services/auth.service';
-import { RegisterRequestInterface } from '../../types/register-request.interface';
-import { BackendErrorsInterface } from '../../../shared/types/backend-errors.interface';
+import { LoginRequestInterface } from '../../types/login-request.interface';
+import { loginAction } from '../../store/actions/login.actions';
 
 @Component({
-  selector: 'yl-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss'],
+  selector: 'yl-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss'],
 })
-export class RegisterComponent implements OnInit {
+export class LoginComponent implements OnInit {
   form: FormGroup;
   isSubmitting$: Observable<boolean>;
   backendErrors$: Observable<BackendErrorsInterface | null>;
-
   constructor(
     private fb: FormBuilder,
     private store: Store,
@@ -39,6 +38,7 @@ export class RegisterComponent implements OnInit {
 
   initializeForm(): void {
     this.form = this.fb.group({
+      username: ['', Validators.required],
       email: [''],
       password: [''],
     });
@@ -46,9 +46,9 @@ export class RegisterComponent implements OnInit {
 
   onSubmit(): void {
     console.log(this.form.value);
-    const request: RegisterRequestInterface = {
+    const request: LoginRequestInterface = {
       user: this.form.value,
     };
-    this.store.dispatch(registerAction({ request }));
+    this.store.dispatch(loginAction({ request }));
   }
 }

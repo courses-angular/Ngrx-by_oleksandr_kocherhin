@@ -12,9 +12,10 @@ import { RegisterEffect } from './store/effects/register-effect.service';
 import { BackendErrorMessagesModule } from '../shared/modules/backendErrorMessages/backend-error-messages.module';
 import { PersistenceService } from '../shared/services/persistence.service';
 import { LoginEffect } from './store/effects/login-effect.service';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
-  declarations: [RegisterComponent],
+  declarations: [RegisterComponent, LoginComponent],
   imports: [
     CommonModule,
     AuthRoutingModule,
