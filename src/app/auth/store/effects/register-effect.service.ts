@@ -5,14 +5,21 @@ import {
   registerFailureAction,
   registerSuccessAction,
 } from '../actions/register.action';
-import { catchError, map, switchMap } from 'rxjs/operators';
+import { catchError, map, switchMap, tap } from 'rxjs/operators';
 import { AuthService } from '../../services/auth.service';
 import { of } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
+import { PersistenceService } from '../../../shared/services/persistence.service';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class RegisterEffect {
-  constructor(private actions$: Actions, private authService: AuthService) {}
+  constructor(
+    private actions$: Actions,
+    private authService: AuthService,
+    private localStorageService: PersistenceService,
+    private router: Router
+  ) {}
 
   register$ = createEffect(() =>
     this.actions$.pipe(
@@ -20,6 +27,15 @@ export class RegisterEffect {
       switchMap(({ request }) => {
         return this.authService.registerUser(request).pipe(
           map((currentUser) => {
+            // Bad ! TODO: set persistence service
+            // localStorage.setItem(
+            //   'accessToken',
+            //   JSON.stringify(currentUser.token)
+            // );
+            this.localStorageService.setLocalStorage(
+              'accessToken',
+              currentUser.token
+            );
             return registerSuccessAction({ currentUser });
           }),
           catchError((errors: HttpErrorResponse) => {
@@ -28,5 +44,16 @@ export class RegisterEffect {
         );
       })
     )
+  );
+
+  redirectAfterSubmit$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(registerSuccessAction),
+        tap(() => {
+          this.router.navigateByUrl('/');
+        })
+      ),
+    { dispatch: false }
   );
 }
