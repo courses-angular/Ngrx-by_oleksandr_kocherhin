@@ -5,6 +5,11 @@ import {
   registerSuccessAction,
   registerFailureAction,
 } from '../actions/register.action';
+import {
+  loginAction,
+  loginFailureAction,
+  loginSuccessAction,
+} from '../actions/login.actions';
 
 const initialState: AuthStateInterface = {
   isSubmitting: false,
@@ -39,10 +44,34 @@ const authReducer = createReducer(
       isSubmitting: false,
       validationErrors: action.errors,
     })
+  ),
+  on(
+    loginAction,
+    (state): AuthStateInterface => ({
+      ...state,
+      isSubmitting: true,
+      validationErrors: null,
+    })
+  ),
+  on(
+    loginSuccessAction,
+    (state, action): AuthStateInterface => ({
+      ...state,
+      isSubmitting: false,
+      isLoggedIn: true,
+      currentUser: action.currentUser,
+    })
+  ),
+  on(
+    loginFailureAction,
+    (state, action): AuthStateInterface => ({
+      ...state,
+      isSubmitting: false,
+      validationErrors: action.errors,
+    })
   )
 );
 
-// tslint:disable-next-line:typedef
-export function reducers(state: AuthStateInterface, action: Action) {
+export function reducers(state: AuthStateInterface, action: Action): AuthStateInterface {
   return authReducer(state, action);
 }

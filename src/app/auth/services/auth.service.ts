@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { AuthResponseInterface } from '../types/auth-response.interface';
 import { map } from 'rxjs/operators';
+import { LoginRequestInterface } from '../types/login-request.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -18,6 +19,14 @@ export class AuthService {
   ): Observable<CurrentUserInterface> {
     return this.http
       .post<AuthResponseInterface>(`${environment.apiUrl}/users`, data)
-      .pipe(map((response: AuthResponseInterface) => response.user));
+      .pipe(map(this.getUser));
+  }
+  login(data: LoginRequestInterface): Observable<CurrentUserInterface> {
+    return this.http
+      .post<AuthResponseInterface>(`${environment.apiUrl}/users/login`, data)
+      .pipe(map(this.getUser));
+  }
+  getUser(response: AuthResponseInterface): CurrentUserInterface {
+    return response.user;
   }
 }
