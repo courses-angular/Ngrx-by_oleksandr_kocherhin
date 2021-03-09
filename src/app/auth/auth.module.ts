@@ -13,6 +13,7 @@ import { BackendErrorMessagesModule } from '../shared/modules/backendErrorMessag
 import { PersistenceService } from '../shared/services/persistence.service';
 import { LoginEffect } from './store/effects/login-effect.service';
 import { LoginComponent } from './components/login/login.component';
+import { GetCurrentUserOnloadEffectService } from './store/effects/get-current-user-onload-effect.service';
 
 @NgModule({
   declarations: [RegisterComponent, LoginComponent],
@@ -21,9 +22,17 @@ import { LoginComponent } from './components/login/login.component';
     AuthRoutingModule,
     ReactiveFormsModule,
     StoreModule.forFeature('auth', reducers),
-    EffectsModule.forFeature([RegisterEffect, LoginEffect]),
+    EffectsModule.forFeature([
+      RegisterEffect,
+      LoginEffect,
+      GetCurrentUserOnloadEffectService,
+    ]),
     BackendErrorMessagesModule,
   ],
-  providers: [AuthService, PersistenceService],
+  providers: [
+    AuthService,
+    PersistenceService,
+    GetCurrentUserOnloadEffectService,
+  ],
 })
 export class AuthModule {}

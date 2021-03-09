@@ -1,10 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { getCurrentUserOnLoadAction } from './auth/store/actions/get-current-user-onload.action';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
-  title = 'ngrx-course-by-Oleksandr-Kocherhin';
+export class AppComponent implements OnInit {
+  constructor(private store: Store) {}
+  ngOnInit(): void {
+    this.store.dispatch(getCurrentUserOnLoadAction());
+  }
 }

@@ -31,7 +31,7 @@
           </a>
         </li>
       </ng-container>
-      <ng-container *ngIf="isAnonymous$ | async">
+      <ng-container *ngIf="(isAnonymous$ | async)">
         <li class="nav-item">
           <a [routerLink]="['/login']" class="nav-link">
           Sign In

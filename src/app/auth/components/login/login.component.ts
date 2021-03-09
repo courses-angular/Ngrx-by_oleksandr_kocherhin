@@ -9,7 +9,7 @@ import {
   validationErrorsSelector,
 } from '../../store/selectors/auth-feature.selector';
 import { LoginRequestInterface } from '../../types/login-request.interface';
-import { loginAction } from '../../store/actions/login.actions';
+import { loginAction } from '../../store/actions/login.action';
 
 @Component({
   selector: 'yl-login',

@@ -10,7 +10,7 @@ import {
   loginAction,
   loginFailureAction,
   loginSuccessAction,
-} from '../actions/login.actions';
+} from '../actions/login.action';
 
 @Injectable()
 export class LoginEffect {
