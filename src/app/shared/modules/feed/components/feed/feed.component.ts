@@ -1,14 +1,14 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import { getFeedAction } from '../../modules/feed/store/actions/get-feed.actions';
 import { Observable, pipe } from 'rxjs';
-import { GetFeedResponseInterface } from '../../../global-feed/types/get-feed-response-interface';
 import { map } from 'rxjs/operators';
+import { GetFeedResponseInterface } from '../../../../../global-feed/types/get-feed-response-interface';
 import {
   feedDataSelector,
   feedErrorSelector,
   isFeedLoadingSelector,
-} from '../../modules/feed/store/selectors/feed.selector.selectors';
+} from '../../store/selectors/feed.selector.selectors';
+import { getFeedAction } from '../../store/actions/get-feed.actions';
 
 @Component({
   selector: 'yl-feed',

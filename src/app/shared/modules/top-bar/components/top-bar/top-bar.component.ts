@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { CurrentUserInterface } from '../../types/current-user';
 import { select, Store } from '@ngrx/store';
+import { CurrentUserInterface } from '../../../../types/current-user';
+import { AuthService } from '../../../../../auth/services/auth.service';
 import {
   currentUserSelector,
   isAnonymousSelector,
   isLoggedInSelector,
-} from '../../../auth/store/selectors/auth-feature.selector';
-import { AuthService } from '../../../auth/services/auth.service';
+} from '../../../../../auth/store/selectors/auth-feature.selector';
 
 @Component({
   selector: 'yl-top-bar',
