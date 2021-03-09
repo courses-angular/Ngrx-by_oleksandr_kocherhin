@@ -11,6 +11,10 @@ export const isFeedLoadingSelector = createSelector(
   feedFeatureSelector,
   (authState) => authState.isLoading
 );
+export const feedErrorSelector = createSelector(
+  feedFeatureSelector,
+  (authState) => authState.error
+);
 
 export const feedDataSelector = createSelector(
   feedFeatureSelector,
