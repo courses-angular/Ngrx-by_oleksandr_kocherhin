@@ -1,7 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import { Observable, pipe } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, Subscription } from 'rxjs';
 import { GetFeedResponseInterface } from '../../../../../global-feed/types/get-feed-response-interface';
 import {
   feedDataSelector,
@@ -9,25 +8,38 @@ import {
   isFeedLoadingSelector,
 } from '../../store/selectors/feed.selector.selectors';
 import { getFeedAction } from '../../store/actions/get-feed.actions';
+import { environment } from '../../../../../../environments/environment';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'yl-feed',
   templateUrl: './feed.component.html',
   styleUrls: ['./feed.component.scss'],
 })
-export class FeedComponent implements OnInit {
+export class FeedComponent implements OnInit, OnDestroy {
   @Input('apiUrl') apiUrlProps: string = '';
   isLoadingFeed$: Observable<boolean>;
   feedError$: Observable<string | null>;
   feedData$: Observable<GetFeedResponseInterface | null>;
-  constructor(private store: Store) {}
+  limit: number = environment.limit;
+  baseUrl: string = '';
+  queryParamsSubscription: Subscription;
+  currentPage: number = null;
+  constructor(
+    private store: Store,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
+    console.log('baseUrl', this.router.url);
     this.fetchData();
     this.initializeValues();
+    this.initializeListeners();
   }
 
   private initializeValues(): void {
+    this.baseUrl = this.router.url.split('?')[0];
     this.isLoadingFeed$ = this.store.pipe(select(isFeedLoadingSelector));
     this.feedError$ = this.store.pipe(select(feedErrorSelector));
     this.feedData$ = this.store.pipe(select(feedDataSelector));
@@ -35,5 +47,17 @@ export class FeedComponent implements OnInit {
 
   private fetchData(): void {
     this.store.dispatch(getFeedAction({ url: this.apiUrlProps }));
+  }
+
+  private initializeListeners(): void {
+    this.queryParamsSubscription = this.route.queryParams.subscribe(
+      (params) => {
+        this.currentPage = Number(params.page || '1');
+        console.log('Current page', this.currentPage);
+      }
+    );
+  }
+  ngOnDestroy(): void {
+    this.queryParamsSubscription.unsubscribe();
   }
 }

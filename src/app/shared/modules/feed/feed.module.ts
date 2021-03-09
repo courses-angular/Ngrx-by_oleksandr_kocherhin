@@ -10,6 +10,7 @@ import { FeedService } from '../../services/feed.service';
 import { FeedComponent } from './components/feed/feed.component';
 import { ErrorMessageModule } from '../error-message/error-message.module';
 import { LoadingModule } from '../loading/loading.module';
+import { PaginationModule } from '../pagination/pagination.module';
 
 @NgModule({
   declarations: [FeedComponent],
@@ -20,6 +21,7 @@ import { LoadingModule } from '../loading/loading.module';
     StoreModule.forFeature('feed', reducers),
     ErrorMessageModule,
     LoadingModule,
+    PaginationModule,
   ],
   exports: [FeedComponent],
   providers: [FeedService],
