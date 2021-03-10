@@ -21,7 +21,7 @@
     <a class="preview-link" [routerLink]="['/articles',article.slug]">
       <h1>{{article.title}}</h1>
       <p>{{article.description}}</p>
-      Here is list of tags
+      <yl-tag-list [tags]="article.tagList"></yl-tag-list>
     </a>
   </div>
   <yl-pagination [articlesCount]="(feedData$ | async).articlesCount" [currentPage]="currentPage" [limit]="limit" [url]="baseUrl"></yl-pagination>

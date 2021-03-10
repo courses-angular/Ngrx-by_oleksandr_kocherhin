@@ -1,0 +1,12 @@
+<yl-loading *ngIf="isLoading$ | async"></yl-loading>
+<yl-error-message *ngIf="errors$ | async"></yl-error-message>
+
+
+<div class="sidebar" *ngIf="popularTags$ | async as tags">
+  <p>PopularTags</p>
+  <div class="tag-list">
+    <a [routerLink]="['/tags',tag]" *ngFor="let tag of tags" class="tag-default tag-pill">
+      {{tag}}
+    </a>
+  </div>
+</div>

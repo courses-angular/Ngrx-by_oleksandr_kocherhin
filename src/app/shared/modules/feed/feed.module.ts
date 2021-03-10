@@ -12,6 +12,8 @@ import { ErrorMessageModule } from '../error-message/error-message.module';
 import { LoadingModule } from '../loading/loading.module';
 import { PaginationModule } from '../pagination/pagination.module';
 import { UtilsService } from '../../services/utils.service';
+import { TagListModule } from '../tag-list/tag-list.module';
+import { PopularTagsModule } from '../popular-tags/popular-tags.module';
 
 @NgModule({
   declarations: [FeedComponent],
@@ -23,6 +25,8 @@ import { UtilsService } from '../../services/utils.service';
     ErrorMessageModule,
     LoadingModule,
     PaginationModule,
+    TagListModule,
+    PopularTagsModule,
   ],
   exports: [FeedComponent],
   providers: [FeedService, UtilsService],
