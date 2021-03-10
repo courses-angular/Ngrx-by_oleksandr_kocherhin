@@ -10,6 +10,7 @@ import {
 import { getFeedAction } from '../../store/actions/get-feed.actions';
 import { environment } from '../../../../../../environments/environment';
 import { ActivatedRoute, Router } from '@angular/router';
+import { parseUrl, stringify } from 'query-string';
 
 @Component({
   selector: 'yl-feed',
@@ -25,6 +26,7 @@ export class FeedComponent implements OnInit, OnDestroy {
   baseUrl: string = '';
   queryParamsSubscription: Subscription;
   currentPage: number = null;
+
   constructor(
     private store: Store,
     private router: Router,
@@ -33,7 +35,6 @@ export class FeedComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     console.log('baseUrl', this.router.url);
-    this.fetchData();
     this.initializeValues();
     this.initializeListeners();
   }
@@ -45,18 +46,33 @@ export class FeedComponent implements OnInit, OnDestroy {
     this.feedData$ = this.store.pipe(select(feedDataSelector));
   }
 
-  private fetchData(): void {
-    this.store.dispatch(getFeedAction({ url: this.apiUrlProps }));
-  }
-
   private initializeListeners(): void {
     this.queryParamsSubscription = this.route.queryParams.subscribe(
       (params) => {
         this.currentPage = Number(params.page || '1');
         console.log('Current page', this.currentPage);
+        this.fetchFeed();
       }
     );
   }
+
+  private fetchFeed(): void {
+    const offset = this.currentPage * this.limit - this.limit;
+    const parsedUrl = parseUrl(this.apiUrlProps);
+    const stringifyParams = stringify({
+      limit: this.limit,
+      offset,
+      ...parsedUrl.query,
+    });
+    const apiUrlWithParams = `${parsedUrl.url}?${stringifyParams}`;
+    console.log('apiUrlWithParams', apiUrlWithParams);
+    this.store.dispatch(getFeedAction({ url: apiUrlWithParams }));
+    // limit 10
+    // offset 0
+    // offset 10
+    // offset 20
+  }
+
   ngOnDestroy(): void {
     this.queryParamsSubscription.unsubscribe();
   }

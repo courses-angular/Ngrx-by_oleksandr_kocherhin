@@ -11,6 +11,7 @@ import { FeedComponent } from './components/feed/feed.component';
 import { ErrorMessageModule } from '../error-message/error-message.module';
 import { LoadingModule } from '../loading/loading.module';
 import { PaginationModule } from '../pagination/pagination.module';
+import { UtilsService } from '../../services/utils.service';
 
 @NgModule({
   declarations: [FeedComponent],
@@ -24,6 +25,6 @@ import { PaginationModule } from '../pagination/pagination.module';
     PaginationModule,
   ],
   exports: [FeedComponent],
-  providers: [FeedService],
+  providers: [FeedService, UtilsService],
 })
 export class FeedModule {}
