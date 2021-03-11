@@ -7,6 +7,7 @@ import { FeedModule } from '../shared/modules/feed/feed.module';
 import { BannerModule } from '../shared/modules/banner/banner.module';
 import { ErrorMessageModule } from '../shared/modules/error-message/error-message.module';
 import { PopularTagsModule } from '../shared/modules/popular-tags/popular-tags.module';
+import { FeedTogglerModule } from '../shared/modules/feed-toggler/feed-toggler.module';
 
 @NgModule({
   declarations: [GlobalFeedComponent],
@@ -17,6 +18,7 @@ import { PopularTagsModule } from '../shared/modules/popular-tags/popular-tags.m
     BannerModule,
     ErrorMessageModule,
     PopularTagsModule,
+    FeedTogglerModule,
   ],
 })
 export class GlobalFeedModule {}

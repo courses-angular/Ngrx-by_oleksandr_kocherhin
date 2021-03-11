@@ -1,14 +1,13 @@
-
 <div class="home-page">
   <yl-banner></yl-banner>
   <div class="container page">
     <div class="row">
       <div class="col-md-9">
-        <yl-feed-toggler></yl-feed-toggler>
+        <yl-feed-toggler [tagName]="tagName"></yl-feed-toggler>
         <yl-feed [apiUrl]="apiUrl"></yl-feed>
       </div>
       <div class="col-md-3">
-       <yl-popular-tags></yl-popular-tags>
+        <yl-popular-tags></yl-popular-tags>
       </div>
     </div>
   </div>

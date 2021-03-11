@@ -1,0 +1,13 @@
+ul{
+  display: flex;
+  gap:20px;
+  li{
+  font-size: 20px;
+    a{
+      &.active{
+        border-bottom: 2px solid #5cb85c;
+      }
+    }
+}
+}
+
