@@ -17,6 +17,7 @@ import { TopBarComponent } from './shared/modules/top-bar/components/top-bar/top
 import { routerReducer, StoreRouterConnectingModule } from '@ngrx/router-store';
 import { YourFeedModule } from './shared/modules/your-feed/components/your-feed.module';
 import { TagFeedModule } from './shared/modules/tag-feed/tag-feed.module';
+import { ArticleModule } from './article/article.module';
 
 @NgModule({
   declarations: [AppComponent, TopBarComponent],
@@ -38,6 +39,7 @@ import { TagFeedModule } from './shared/modules/tag-feed/tag-feed.module';
     GlobalFeedModule,
     YourFeedModule,
     TagFeedModule,
+    ArticleModule,
   ],
   providers: [
     PersistenceService,
