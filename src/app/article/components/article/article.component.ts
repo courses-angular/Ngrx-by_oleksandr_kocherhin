@@ -12,6 +12,7 @@ import {
 import { currentUserSelector } from '../../../auth/store/selectors/auth-feature.selector';
 import { map } from 'rxjs/operators';
 import { CurrentUserInterface } from '../../../shared/types/current-user';
+import { deleteArticleAction } from '../../store/actions/delete-article.action';
 
 @Component({
   selector: 'yl-article',
@@ -67,5 +68,9 @@ export class ArticleComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.articleSubscription.unsubscribe();
+  }
+
+  onDeleteArticle(): void {
+    this.store.dispatch(deleteArticleAction({ slug: this.slug }));
   }
 }
