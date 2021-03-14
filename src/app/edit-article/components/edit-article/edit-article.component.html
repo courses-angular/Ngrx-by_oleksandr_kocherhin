@@ -1,0 +1,5 @@
+<yl-loading *ngIf="isLoading$ | async"></yl-loading>
+<yl-backend-error-messages *ngIf="validationErrors$ | async"></yl-backend-error-messages>
+
+<yl-article-form *ngIf="initialValues$ | async" [initialValues]="initialValues$ | async" [isSubmitting]="isSubmitting$ | async" (articleSubmit)="onSubmit($event,slug)" [errors]="validationErrors$ | async"></yl-article-form>
+
