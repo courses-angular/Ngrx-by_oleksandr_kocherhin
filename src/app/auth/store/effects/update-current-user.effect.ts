@@ -1,20 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, switchMap, tap } from 'rxjs/operators';
+import { catchError, map, switchMap } from 'rxjs/operators';
 import { AuthService } from '../../services/auth.service';
 import { of } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
-import { PersistenceService } from '../../../shared/services/persistence.service';
 import { Router } from '@angular/router';
-import {
-  loginAction,
-  loginFailureAction,
-  loginSuccessAction,
-} from '../actions/login.action';
 import {
   updateCurrentUserAction,
   updateCurrentUserFailureAction,
-  updateCurrentUserSuccessAction
+  updateCurrentUserSuccessAction,
 } from '../actions/update-current-user.action';
 
 @Injectable()
@@ -36,7 +30,9 @@ export class UpdateCurrentUserEffect {
               return updateCurrentUserSuccessAction({ currentUser });
             }),
             catchError((errors: HttpErrorResponse) => {
-              return of(updateCurrentUserFailureAction({ errors: errors.error.errors }));
+              return of(
+                updateCurrentUserFailureAction({ errors: errors.error.errors })
+              );
             })
           );
       })

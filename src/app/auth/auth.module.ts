@@ -14,6 +14,7 @@ import { PersistenceService } from '../shared/services/persistence.service';
 import { LoginEffect } from './store/effects/login-effect.service';
 import { LoginComponent } from './components/login/login.component';
 import { GetCurrentUserOnloadEffectService } from './store/effects/get-current-user-onload-effect.service';
+import { UpdateCurrentUserEffect } from './store/effects/update-current-user.effect';
 
 @NgModule({
   declarations: [RegisterComponent, LoginComponent],
@@ -26,6 +27,7 @@ import { GetCurrentUserOnloadEffectService } from './store/effects/get-current-u
       RegisterEffect,
       LoginEffect,
       GetCurrentUserOnloadEffectService,
+      UpdateCurrentUserEffect,
     ]),
     BackendErrorMessagesModule,
   ],
