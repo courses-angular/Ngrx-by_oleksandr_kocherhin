@@ -1,0 +1,31 @@
+<div class="settings-page" *ngIf="currentUser">
+  <div class="container page">
+    <div class="row">
+      <div class="col-md-6 offset-md-3 col-xs-12">
+        <h1 class="text-xs-center">Settings</h1>
+        <yl-backend-error-messages *ngIf="validationErrors$ | async" [backendErrors]="validationErrors$ | async"></yl-backend-error-messages>
+        <form [formGroup]="settingsForm" (ngSubmit)="onSubmit()" *ngIf="settingsForm">
+          <fieldset>
+            <fieldset class="form-group">
+              <input type="text" class="form-control form-control-lg" formControlName="image" placeholder="Picture's url">
+            </fieldset>
+            <fieldset class="form-group">
+              <input type="text" class="form-control form-control-lg" formControlName="username" placeholder="Username">
+            </fieldset>
+            <fieldset class="form-group">
+              <textarea  class="form-control form-control-lg" formControlName="bio" placeholder="Short bio about you..."></textarea>
+            </fieldset>
+            <fieldset class="form-group">
+              <input type="text" class="form-control form-control-lg" formControlName="email" placeholder="Email">
+            </fieldset>
+            <fieldset class="form-group">
+              <input type="text" class="form-control form-control-lg" formControlName="password" placeholder="Password">
+            </fieldset>
+          </fieldset>
+          <button type="submit" class="btn btn-primary btn-lg pull-xs-right" [disabled]="settingsForm?.invalid || (isSubmitting$ | async)">Update settings</button>
+        </form>
+        <button type="button" class="btn btn-outline-danger" (click)="onLogOut()">Or click here to Logout</button>
+      </div>
+    </div>
+  </div>
+</div>

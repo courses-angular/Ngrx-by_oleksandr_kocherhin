@@ -15,6 +15,7 @@ import { LoginEffect } from './store/effects/login-effect.service';
 import { LoginComponent } from './components/login/login.component';
 import { GetCurrentUserOnloadEffectService } from './store/effects/get-current-user-onload-effect.service';
 import { UpdateCurrentUserEffect } from './store/effects/update-current-user.effect';
+import { LogoutEffect } from './store/effects/logout.effect';
 
 @NgModule({
   declarations: [RegisterComponent, LoginComponent],
@@ -28,6 +29,7 @@ import { UpdateCurrentUserEffect } from './store/effects/update-current-user.eff
       LoginEffect,
       GetCurrentUserOnloadEffectService,
       UpdateCurrentUserEffect,
+      LogoutEffect,
     ]),
     BackendErrorMessagesModule,
   ],
