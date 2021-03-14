@@ -14,6 +14,7 @@ import { PaginationModule } from '../pagination/pagination.module';
 import { UtilsService } from '../../services/utils.service';
 import { TagListModule } from '../tag-list/tag-list.module';
 import { PopularTagsModule } from '../popular-tags/popular-tags.module';
+import { AddToFavoritesModule } from '../add-to-favorites/add-to-favorites.module';
 
 @NgModule({
   declarations: [FeedComponent],
@@ -27,6 +28,7 @@ import { PopularTagsModule } from '../popular-tags/popular-tags.module';
     PaginationModule,
     TagListModule,
     PopularTagsModule,
+    AddToFavoritesModule,
   ],
   exports: [FeedComponent],
   providers: [FeedService, UtilsService],

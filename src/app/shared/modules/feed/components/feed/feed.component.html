@@ -15,7 +15,7 @@
         <span class="date">{{article.createdAt}}</span>
       </div>
       <div class="pull-xs-right">
-        Add to favorites
+        <yl-add-to-favorites [isFavorited]="article.favorited" [articleSlug]="article.slug" [favoritesCount]="article.favoritesCount"></yl-add-to-favorites>
       </div>
     </div>
     <a class="preview-link" [routerLink]="['/articles',article.slug]">
