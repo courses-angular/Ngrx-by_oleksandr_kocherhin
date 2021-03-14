@@ -19,7 +19,7 @@
               <input type="text" class="form-control form-control-lg" formControlName="email" placeholder="Email">
             </fieldset>
             <fieldset class="form-group">
-              <input type="text" class="form-control form-control-lg" formControlName="password" placeholder="Password">
+              <input type="password" class="form-control form-control-lg" formControlName="password" placeholder="Password">
             </fieldset>
           </fieldset>
           <button type="submit" class="btn btn-primary btn-lg pull-xs-right" [disabled]="settingsForm?.invalid || (isSubmitting$ | async)">Update settings</button>

@@ -12,6 +12,7 @@ import {
 } from '../../store/selectors/settings.selector';
 import { updateCurrentUserAction } from '../../../auth/store/actions/update-current-user.action';
 import { logoutAction } from '../../../auth/store/actions/sync.action';
+import { CurrentUserInputInterface } from '../../../shared/types/current-user-input.interface';
 
 @Component({
   selector: 'yl-settings',
@@ -73,12 +74,11 @@ export class SettingsComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(): void {
-    const currentUserInput: CurrentUserInterface = {
+    const currentUserInput: CurrentUserInputInterface = {
       ...this.currentUser,
       ...this.settingsForm?.value,
     };
     console.log(currentUserInput);
-    // @ts-ignore
     this.store.dispatch(updateCurrentUserAction({ currentUserInput }));
   }
 }
